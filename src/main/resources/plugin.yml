@@ -1,0 +1,4 @@
+name: Maintenance Mode
+version: '${project.version}'
+main: org.ncc.maintenance_mode.Main
+api-version: '1.19'
