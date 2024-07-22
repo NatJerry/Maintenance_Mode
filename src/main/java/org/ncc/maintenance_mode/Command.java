@@ -17,8 +17,10 @@ public class Command implements CommandExecutor {
                 sender.sendMessage("Maintenance Mode now off");
             } else {
                 Main.setValue(true);
+                Bukkit.getOnlinePlayers().forEach((Consumer<Player>) player -> {
+                    if(!player.hasPermission("smode.ignore")) player.kick(Component.text(Main.kickMessage));
+                });
                 sender.sendMessage("Maintenance Mode now on");
-                Bukkit.getOnlinePlayers().forEach((Consumer<Player>) player -> player.kick(Component.text(Main.kickMessage)));
             }
         }else{
             sender.sendMessage("You have no permission to use this command");

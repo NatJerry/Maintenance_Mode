@@ -1,4 +1,4 @@
-name: Maintenance Mode
+name: Maintenance_Mode
 version: '${project.version}'
 main: org.ncc.maintenance_mode.Main
 api-version: '1.19'
@@ -11,4 +11,6 @@ commands:
 permissions:
   smode.command:
     default: op
-
+  smode.ignore:
+    default: op
+    description: Permission to make plugin be ignored to kick you when in maintenance
