@@ -2,6 +2,7 @@ package org.ncc.maintenance_mode;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -17,6 +18,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.function.Consumer;
 
 public final class Main extends JavaPlugin implements Listener {
     File langFile = new File(getDataFolder(),"lang.yml");
@@ -36,9 +38,8 @@ public final class Main extends JavaPlugin implements Listener {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            kickMessage = langFileConf.getString("kickmessage","Server in maintenance");
         }
-
+        kickMessage = langFileConf.getString("kickmessage","Server in maintenance");
         if(!dataFile.exists()){
             if(!dataFile.getParentFile().exists()) dataFile.getParentFile().mkdirs();
             try(BufferedOutputStream out = new BufferedOutputStream(Files.newOutputStream(dataFile.toPath()))){
@@ -73,7 +74,7 @@ public final class Main extends JavaPlugin implements Listener {
     @EventHandler
     public void playerLogin(PlayerLoginEvent event){
         if(b){
-            event.kickMessage(Component.text(kickMessage));
+            event.disallow(PlayerLoginEvent.Result.KICK_OTHER,Component.text(kickMessage));
         }
     }
     public static boolean getValue(){
