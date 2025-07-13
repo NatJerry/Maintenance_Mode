@@ -2,7 +2,6 @@ package org.ncc.maintenance_mode;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -18,7 +17,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.function.Consumer;
 
 public final class Main extends JavaPlugin implements Listener {
     File langFile = new File(getDataFolder(),"lang.yml");
